@@ -1,10 +1,28 @@
 # StudReg
+Перед запуском blockchain сети необходимо удостовериться в наличии необходимого ПО:
 1) Проверить версию Docker: docker --version (Поддерживаемая версия - 17.06.2-ce и выше) [Install Docker](https://www.docker.com/get-docker)
 2) Docker Compose устанавливается вместе с Docker. Если у вас уже был установлен Docker устаревшей версии, то нужно проверить наличие и версию Docker Compose: docker-compose --version (Поддерживаемая версия - 1.14.0 и выше) [Install Docker Compose](https://www.docker.com/get-docker)
-3) Чейнкод этого проекта написан на Go, поэтому необходимо установить Go версии 1.11.х и выше [Install Go](https://golang.org/dl/) [Конфигурация Go](https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html#go-programming-language)
-4) Node.js Runtime и NPM - Версии, отличные от 8 серии, в настоящее время не поддерживаются. [Node.js v8.x](https://nodejs.org/en/download/)
+3) Чейнкод этого проекта написан на Go, поэтому необходимо установить Go версии 1.11.х и выше [Install Go](https://golang.org/dl/) | [Конфигурация Go](https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html#go-programming-language)
+4) Node.js Runtime и NPM - Поддерживается только 8-я мажорная версия. [Node.js v8.x](https://nodejs.org/en/download/)
 
-==The following applies to Ubuntu 16.04 users only.==
+[Более детальная инструкция по установке ПО.](https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html)
+
+## Запуск Hyperledger Fabric
+
+Переходим в папку `scripts` и запускаем сеть.
+```sh
+cd scripts
+sh ./startFabric.sh
+```
+Начнется процесс загрузки необходимых образов из Docker Hub. В конце должна получиться примерно такая картина. Проверьте на наличие ошибок, их быть не должно. Предупреждения могут быть, это не критично.
+Картинка 1  терминал с транзакцией
+В конце выполним `docker ps -a`, чтобы посмотреть запущенные контейнеры. У вас должно получиться следующее:
+Картинка 2 терминал с контейнерами
+Внимательно проверьте, чтобы не было упавших контейнеров, в противном случае необходимо выполнить `startFabric.sh` еще раз.
+
+Если все отлично, то идем по инструкции в терминале:
+Нам нужно выполнить установку `node_modules` для клиента и для сервера. Сначала в корне проекта выполним `npm install`. После завершения установки переходим в директорию `client` и выполняем тот же `npm install`.
+Теперь в папке `scripts` выполняем `node enrollAdmin.js` и после него `node registerUser.js`.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
