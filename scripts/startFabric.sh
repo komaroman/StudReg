@@ -34,4 +34,4 @@ sleep 10
 
 printf "\nTotal setup execution time : $(($(date +%s) - starttime)) secs ...\n\n\n"
 printf "Start by installing required packages run 'npm install'\n"
-printf "Then run 'node enrollAdmin.js', then 'node registerUser'\n\n"
+printf "Then run 'node enrollAdmin.js', then 'node registerUser.js'\n\n"

@@ -24,6 +24,7 @@ sh ./startFabric.sh
 Нам нужно выполнить установку `node_modules` для клиента и для сервера. Сначала в корне проекта выполним `npm install`. После завершения установки переходим в директорию `client` и выполняем тот же `npm install`.
 Теперь в папке `scripts` выполняем `node enrollAdmin.js` и после него `node registerUser.js`.
 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
