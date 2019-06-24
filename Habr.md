@@ -8,7 +8,7 @@
 
 Вы можете перейти в [github нашего проекта](https://github.com/komaroman/StudReg), и не забудьте [убедиться в наличии необходимого ПО](#app_a) рекомендуемой версии.
 
-Проблема, которую мы пытались решить в нашей blockchain системе - это ведение учета студентов (бакалавров), а также их достижений, с целью снизить возможность предоставления поддельных сертификатов, грамот и т.д. За предосталенные достижения при поступлении в магистратуру могут начисляться дополнительные баллы, поэтому 
+Проблема, которую мы пытались решить в нашей blockchain системе - это ведение учета студентов (бакалавров), а также их достижений, с целью снизить возможность предоставления поддельных сертификатов, грамот и т.д. За предосталенные достижения при поступлении в магистратуру могут начисляться дополнительные баллы, поэтому...
 
 ## Chaincode
 
@@ -94,11 +94,14 @@ npm install
 Ниже описаны команды, необходимые для создания канала, добавления пира в канал а также `install` и `instantiate` у chaincode.
 
 ```sh
-# Создание канала.
+# Создание канала, создание Genesis block.
 docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer channel create -o orderer.example.com:7050 -c mychannel -f /etc/hyperledger/configtx/channel.tx
 
-# Добавление в канал пира и создание Genesis block
+# Добавление в канал пира.
 docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer channel join -b mychannel.block
+
+# При подключении нескольких организаций в один канал, необходимо выполнить fetch с указанием Genesis блока.
+docker exec -e "CORE_PEER_LOCALMSPID=Org2MSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.example.com/msp" peer0.org2.example.com peer channel fetch config mychannel.block -o orderer.example.com:7050 -c mychannel
 
 # Установка chaincode. Необходимо установить chaincode на каждом peer'е, который будет выполнять этот chaincode.
 docker exec -e "CORE\_PEER\_LOCALMSPID=Org1MSP" -e "CORE\_PEER\_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" cli peer chaincode install -n $CC\_NAME -v 1.0 -p "$CC\_SRC\_PATH" -l "$LANGUAGE"
