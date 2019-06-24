@@ -8,27 +8,29 @@ import (
 )
 
 type Student struct {
-	ID            string `json:"id"`
-	FirstName     string `json:"firstName"`
-	LastName      string `json:"lastName"`
-	MiddleName    string `json:"middleName"`
-	PlaceOfBirth  string `json:"placeOfBirth"`
-	DateOfBirth   string `json:"dateOfBirth"`
-	PassportNum   string `json:"passportNum"`
-	MaritalStatus string `json:"maritalStatus"`
-	Gender        string `json:"gender"`
+	ID            string       `json:"id"`
+	FirstName     string       `json:"firstName"`
+	LastName      string       `json:"lastName"`
+	MiddleName    string       `json:"middleName"`
+	PlaceOfBirth  string       `json:"placeOfBirth"`
+	DateOfBirth   string       `json:"dateOfBirth"`
+	PassportNum   string       `json:"passportNum"`
+	MaritalStatus string       `json:"maritalStatus"`
+	Gender        string       `json:"gender"`
+	Achievments   Achievements `json:"achievments"`
 }
 
 type StudentInputData struct {
-	StudID            string `json:"studId"`
-	StudFirstName     string `json:"studFirstName"`
-	StudLastName      string `json:"studLastName"`
-	StudMiddleName    string `json:"studMiddleName"`
-	StudPlaceOfBirth  string `json:"studPlaceOfBirth"`
-	StudDateOfBirth   string `json:"studDateOfBirth"`
-	StudPassportNum   string `json:"studPassportNum"`
-	StudMaritalStatus string `json:"studMaritalStatus"`
-	StudGender        string `json:"studGender"`
+	StudID            string       `json:"studId"`
+	StudFirstName     string       `json:"studFirstName"`
+	StudLastName      string       `json:"studLastName"`
+	StudMiddleName    string       `json:"studMiddleName"`
+	StudPlaceOfBirth  string       `json:"studPlaceOfBirth"`
+	StudDateOfBirth   string       `json:"studDateOfBirth"`
+	StudPassportNum   string       `json:"studPassportNum"`
+	StudMaritalStatus string       `json:"studMaritalStatus"`
+	StudGender        string       `json:"studGender"`
+	Achievments       Achievements `json:"studAchievments"`
 }
 
 func (student *Student) Store(stub shim.ChaincodeStubInterface) error {
@@ -54,15 +56,15 @@ func CreateStudent(stub shim.ChaincodeStubInterface, args []string) peer.Respons
 	}
 
 	newStudent := Student{
-		ID:           input.StudID,
-		FirstName:    input.StudFirstName,
-		LastName:     input.StudLastName,
-		MiddleName:   input.StudMiddleName,
-		PlaceOfBirth: input.StudPlaceOfBirth,
-		DateOfBirth:  input.StudDateOfBirth,
-		PassportNum:  input.StudPassportNum,
+		ID:            input.StudID,
+		FirstName:     input.StudFirstName,
+		LastName:      input.StudLastName,
+		MiddleName:    input.StudMiddleName,
+		PlaceOfBirth:  input.StudPlaceOfBirth,
+		DateOfBirth:   input.StudDateOfBirth,
+		PassportNum:   input.StudPassportNum,
 		MaritalStatus: input.StudMaritalStatus,
-		Gender:       input.StudGender,
+		Gender:        input.StudGender,
 	}
 
 	err = newStudent.Store(stub)

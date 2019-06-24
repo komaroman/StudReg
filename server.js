@@ -12,7 +12,6 @@ app.post('/api/invoke', urlencodedParser, (req, res) => {
   if (!req.body) {
     return res.sendStatus(400);
   }
-  console.log('OUT:', JSON.stringify(req.body));
 
   let form_data = req.body;
 
@@ -211,7 +210,7 @@ app.get('/api/query', urlencodedParser, (req, res) => {
 
   //
   var member_user = null;
-  var store_path = path.join(__dirname, 'hfc-key-store');
+  var store_path = path.join(__dirname, 'scripts/hfc-key-store');
   console.log('Store path:'+store_path);
   var tx_id = null;
 
@@ -242,9 +241,11 @@ app.get('/api/query', urlencodedParser, (req, res) => {
     const request = {
       //targets : --- letting this default to the peers assigned to the channel
       chaincodeId: 'main',
-      fcn: 'queryRope',
-      args: [form_data]
+      fcn: 'queryStudent',
+      args: [form_data.Id],
     };
+    console.log(form_data);
+    console.log(form_data.Id);
 
     // send the query proposal to the peer
     return channel.queryByChaincode(request);
