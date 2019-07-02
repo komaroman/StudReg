@@ -43,6 +43,7 @@ services:
         - ./config/:/etc/hyperledger/configtx
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/:/etc/hyperledger/msp/orderer
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/msp/peerOrg1
+        - ./hyperledger/ordererOrganizations/example.com/orderers/orderer.example.com/production:/var/hyperledger/production
     networks:
       - basic
 
@@ -79,6 +80,7 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/msp/peer
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
+        - ./hyperledger/peerOrganizations/org1.example.com/production:/var/hyperledger/production
     depends_on:
       - orderer.example.com
       - couchdb
@@ -97,6 +99,8 @@ services:
       - 5984:5984
     networks:
       - basic
+    volumes:
+      - ./couchdb/data:/opt/couchdb/data
 
   cli:
     container_name: cli

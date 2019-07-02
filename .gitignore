@@ -36,3 +36,5 @@ yarn-error.log*
 *lock.json
 *.lock
 hfc-key-store
+basic-network/couchdb
+basic-network/hyperledger
